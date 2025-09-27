@@ -1,13 +1,13 @@
-# Lillypad Custom Keyboard
+# LillyPad Pro Custom Keyboard
 
-A custom 58-key split ergonomic mechanical keyboard based on the Lily58 design. This project features a 6×4+4 column-staggered layout with support for both MX and Choc switches, hotswap sockets, OLED displays, and wireless connectivity.
+A premium 58-key split ergonomic mechanical keyboard based on the Lily58 design. This project features a 6×4+4 column-staggered layout with dual MX/Choc switch support, nice!nano wireless controllers, nice!view displays, and premium hotswap sockets.
 
 ## 🌟 Features
 
 - **Split Ergonomic Design**: 58-key column-staggered layout (6×4+4)
-- **Dual Switch Support**: Compatible with both Cherry MX and Kailh Choc switches
-- **Hotswap Ready**: No soldering required for switches
-- **OLED Displays**: Dual 128×32 OLED screens for customizable information
+- **Dual Switch Support**: MX/Choc hybrid hotswap sockets (MXCHOC-HOTSWAP_WAX footprint)
+- **nice!nano Controllers**: Wireless-ready with ZMK firmware support
+- **nice!view Displays**: Premium e-paper displays for enhanced functionality
 - **Wireless Support**: Compatible with nice!nano controllers
 - **QMK/ZMK Firmware**: Full programmability with modern firmware
 - **3D Printed Case**: Custom STL files included for case printing
@@ -23,24 +23,31 @@ A custom 58-key split ergonomic mechanical keyboard based on the Lily58 design. 
 
 ## 🛠 Bill of Materials (BOM)
 
-### PCB & Electronics
+Based on the official LillyPad Pro BOM:
 
-| Component           | Quantity | Description                 | Notes                      |
-| ------------------- | -------- | --------------------------- | -------------------------- |
-| Custom PCB          | 2        | Lillypad PCB (left & right) | From EasyEDA files         |
-| Pro Micro/nice!nano | 2        | Microcontroller             | ZMK compatible recommended |
-| Reset Button        | 2        | Tactile push button         | 6×6mm recommended          |
-| Diodes              | 58       | 1N4148 SMD diodes           | SOD-123 package            |
+### Core Electronics
+
+| Component             | Quantity | Part Number/Description  | Footprint                  | Designator           |
+| --------------------- | -------- | ------------------------ | -------------------------- | -------------------- |
+| nice!nano Controllers | 2        | Wireless microcontroller | NICE!NANO_HOTSWAP          | PROMICROL, PROMICROR |
+| nice!view Displays    | 2        | E-paper display          | NICE!VIEW - BASIC          | EPAPER, EPAPER_R     |
+| Battery Connectors    | 2        | JST B2B-PH-K-S           | B2B-PH-K-S                 | BAT, BAT_R           |
+| Reset Buttons         | 2        | Tactile switch           | SW-SMD_L8.0-W3.5_3-6-3.5MM | RST, RST_R           |
+| Power Switches        | 2        | SPST SMD switch          | SWITCH-SPST-SMD-A          | S1, S2               |
 
 ### Switches & Hotswap
 
-| Component            | Quantity | Description                | Notes                                |
-| -------------------- | -------- | -------------------------- | ------------------------------------ |
-| MX Hotswap Sockets   | 58       | Kailh MX hotswap sockets   | If using MX switches                 |
-| Choc Hotswap Sockets | 58       | Kailh Choc hotswap sockets | If using Choc switches               |
-| MX Switches          | 58       | Cherry MX compatible       | Your choice of tactile/linear/clicky |
-| Choc Switches        | 58       | Kailh Choc v1 switches     | Alternative to MX                    |
-| Keycaps              | 58       | MX or Choc compatible      | Profile of your choice               |
+| Component       | Quantity | Description            | Notes                                |
+| --------------- | -------- | ---------------------- | ------------------------------------ |
+| Hotswap Sockets | 58       | MX/Choc hybrid sockets | MXCHOC-HOTSWAP_WAX footprint         |
+| Switches        | 58       | MX or Choc v1 switches | Your choice of tactile/linear/clicky |
+| Keycaps         | 58       | MX or Choc compatible  | Profile of your choice               |
+
+### Additional Components
+
+| Component      | Quantity | Description     | Source Link            |
+| -------------- | -------- | --------------- | ---------------------- |
+| LiPo Batteries | 2        | 3.7V 110-500mAh | For wireless operation |
 
 ### Hardware & Fasteners
 
@@ -53,13 +60,13 @@ A custom 58-key split ergonomic mechanical keyboard based on the Lily58 design. 
 
 ## 🔧 Assembly Instructions
 
-### 1. PCB Assembly
+### 1. PCB Assembly (Pre-assembled Option Available)
 
-1. **Solder diodes** (58 total) - Pay attention to polarity!
-2. **Install hotswap sockets** - Choose either MX or Choc (or both if PCB supports)
-3. **Install reset buttons** - For firmware flashing
-4. **Solder controllers** - Pro Micro or nice!nano
-5. **Add OLED displays** (optional) - Use sockets for easy removal
+1. **Controllers** - Solder nice!nano controllers to hotswap sockets
+2. **Displays** - Connect nice!view displays (no soldering required)
+3. **Battery connectors** - Solder JST battery connectors
+4. **Reset/Power switches** - Install tactile buttons and power switches
+5. **Final check** - Verify all connections before case assembly
 
 ### 2. Case Assembly
 
@@ -71,26 +78,33 @@ A custom 58-key split ergonomic mechanical keyboard based on the Lily58 design. 
 
 ### 3. Final Assembly
 
-1. **Install switches** into hotswap sockets
+1. **Install switches** into MX/Choc hybrid hotswap sockets
 2. **Mount keycaps** on switches
-3. **Connect TRRS cable** between halves (if wired)
-4. **Flash firmware** (see firmware section)
+3. **Connect batteries** to JST connectors for wireless operation
+4. **Install nice!view displays** (tool-free installation)
+5. **Flash ZMK firmware** (see firmware section)
+6. **Pair keyboard halves** wirelessly
 
 ## 💾 Firmware
 
-This keyboard supports multiple firmware options:
+This keyboard is designed for ZMK firmware with nice!nano controllers:
 
-### ZMK (Wireless - Recommended)
+### ZMK (Primary - Wireless)
 
-- **Controller**: nice!nano
+- **Controller**: nice!nano (required)
 - **Setup**: Use [nickcoutsos.github.io/keymap-editor](https://nickcoutsos.github.io/keymap-editor/) for easy configuration
-- **Features**: Wireless, low power consumption, Vial support
+- **Features**:
+  - Wireless operation with BLE
+  - Low power consumption
+  - nice!view display support
+  - Vial-compatible keymap editing
+  - Battery level monitoring
 
-### QMK (Wired)
+### Backup Wired Mode
 
-- **Controller**: Pro Micro, Elite-C
-- **Configuration**: Full QMK feature support
-- **VIA Compatible**: Real-time keymap editing
+- **Connection**: TRRS cable between halves
+- **Compatibility**: Maintains ZMK firmware
+- **Use case**: When batteries are low or troubleshooting
 
 ## ⚙️ Configuration
 
@@ -114,11 +128,12 @@ For advanced users, you can manually edit the ZMK or QMK configuration files to 
 ## 📐 PCB Specifications
 
 - **Layout**: 58 keys (6×4+4 per half)
-- **Switch Support**: MX and/or Choc hotswap
-- **Connectivity**: USB-C, TRRS, Wireless (with nice!nano)
-- **Displays**: Dual OLED support
-- **RGB**: Per-key and underglow support
-- **Dimensions**: Standard Lily58 compatible
+- **Switch Support**: MX/Choc hybrid hotswap (MXCHOC-HOTSWAP_WAX)
+- **Controllers**: nice!nano with hotswap sockets
+- **Displays**: nice!view e-paper displays
+- **Connectivity**: Wireless BLE primary, TRRS backup
+- **Power**: JST battery connectors, power switches
+- **Dimensions**: Standard Lily58 compatible layout
 
 ## 🖨️ 3D Printing
 
@@ -133,22 +148,47 @@ For advanced users, you can manually edit the ZMK or QMK configuration files to 
 
 - Top case (left & right)
 - Bottom plate (left & right)
-- Knob/encoder cap (if applicable)
+- OLED cover (optional)
 
 ## 🛡️ Troubleshooting
 
 ### Common Issues
 
-1. **Keys not registering**: Check diode orientation and solder joints
-2. **Controller not detected**: Verify USB connection and try different cable
-3. **OLED not working**: Check I2C connections and pull-up resistors
-4. **Wireless connectivity issues**: Ensure proper battery connection and pairing
+1. **Switches not registering**: Check hotswap socket connections
+2. **Controller not detected**: Verify USB connection and try reset button
+3. **nice!view not working**: Check display connector seating
+4. **Wireless connectivity issues**: Ensure battery is connected and charged
+5. **Battery life concerns**: Check power switch position and ZMK power settings
 
 ### Support Resources
 
 - QMK Documentation: [docs.qmk.fm](https://docs.qmk.fm)
 - ZMK Documentation: [zmk.dev](https://zmk.dev)
 - Community Discord servers for real-time help
+
+## 📚 Additional Resources
+
+- **Build Guide**: Detailed step-by-step instructions
+- **Firmware Examples**: Pre-configured layouts
+- **Case Modifications**: Alternative mounting options
+- **Switch Recommendations**: Compatibility guide
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to:
+
+- Submit bug reports or feature requests
+- Share your build photos and modifications
+- Contribute to documentation improvements
+- Suggest PCB or case enhancements
+
+## 📄 License
+
+This project is open source. Please refer to individual component licenses:
+
+- PCB design files: [Check EasyEDA folder]
+- Case files: [Check STL folder]
+- Firmware: Respective firmware licenses (QMK/ZMK)
 
 ## 🙏 Acknowledgments
 
@@ -159,3 +199,5 @@ For advanced users, you can manually edit the ZMK or QMK configuration files to 
 ---
 
 **Happy typing!** 🎉
+
+_For questions or support, please open an issue in this repository._
